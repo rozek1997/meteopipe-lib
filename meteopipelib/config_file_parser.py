@@ -26,7 +26,7 @@ class ConfigFileParser:
                 config = config_file.read()
         except EnvironmentError as error:
             logger.error(error)
-        else:
+        finally:
             config_file.close()
 
         return config
@@ -39,10 +39,10 @@ class ConfigFileParser:
         config = self.configuration
         value = False
         value = config["clientId"]
-        value = config["endpoints"]
-        value = config["topic"]
+        value = config["endpoint"]
+        value = config["topics"]
         value = config["public_key_path"]
         value = config["private_key_path"]
         value = config["cert_path"]
         value = config["ca_cert_path"]
-        # value = config["location"]
+        value = config["location"]

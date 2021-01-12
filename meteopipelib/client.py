@@ -18,6 +18,9 @@ class MeteoPipeClient:
         self.connection.disconnect()
 
     def publish_message(self, message: dict):
+        location = self.config_file_parser.get_configuration()["location"]
+        message["longitude"] = location["longitude"]
+        message["latitude"] = location["latitude"]
         json_message = json.dumps(message)
         self.connection.publish(json_message)
 

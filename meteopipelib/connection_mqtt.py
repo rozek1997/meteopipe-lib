@@ -27,12 +27,13 @@ class Connection:
         self.client.on_connect = self.__on_connect
         self.client.on_message = self.__on_message
         self.client.on_publish = self.__on_publish
-        self.client.connect(host=self.config["endpoints"], port=8883)
+        self.client.on_disconnect = self.__on_disconnect
+        self.client.connect(host=self.config["endpoint"], port=8883)
 
         self.client.loop_start()
 
     def publish(self, message: str):
-        self.client.publish(topic=self.config["topic"], payload=message)
+        self.client.publish(topic=self.config["topics"]["dataTopic"], payload=message)
 
     def disconnect(self):
         self.client.loop_stop()
@@ -41,13 +42,16 @@ class Connection:
     def __on_connect(self, client, userdata, flags, rc):
         if rc == 0:
             logger.info("Client is connected: {} with code {}".format(self.client.is_connected(), rc))
-            self.client.subscribe(self.config.get("topic"))
+            self.client.subscribe(self.config["topics"]["commandTopic"])
         else:
             logger.error("Connection error with error code {}".format(rc))
 
+    def __on_disconnect(self, client, userdata, rc):
+        logger.info("Client disconnected")
+
     def __on_message(self, client, userdata, msg):
         message = json.loads(msg.payload)
-        logger.info(message)
+        logger.info("Message received: {}".format(message))
 
     def __on_publish(self, client, userdata, mid):
-        logger.info("Message send {}".format())
+        logger.info("Message send with id: {}".format(mid))

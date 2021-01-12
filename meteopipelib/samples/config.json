@@ -1,0 +1,16 @@
+{
+    "clientId": "26658f2f-b1e5-4043-b22a-95d76ac2d3ef-test",
+    "endpoint": "a3b5dap8771b49-ats.iot.eu-central-1.amazonaws.com",
+    "topics": {
+        "dataTopic": "meteopipe-thing/data/26658f2f-b1e5-4043-b22a-95d76ac2d3ef/26658f2f-b1e5-4043-b22a-95d76ac2d3ef-test",
+        "commandTopic": "meteopipe-thing/command/26658f2f-b1e5-4043-b22a-95d76ac2d3ef/26658f2f-b1e5-4043-b22a-95d76ac2d3ef-test"
+    },
+    "public_key_path": "/path/to/public-key",
+    "private_key_path": "/path/to/private-key",
+    "cert_path": "/path/to/X509-cert.pem",
+    "ca_cert_path": "/path/to/CA-cert.pem",
+    "location": {
+        "latitude": "20.899573",
+        "longitude": "52.255165"
+    }
+}
